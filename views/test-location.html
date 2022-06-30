@@ -1,0 +1,48 @@
+{% extends "dsp-template.html" %}
+
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+
+  <form action="/test-location" method="POST">
+    <h1 class="govuk-heading-l">Test centre: {{ test_type | displayTestType }}</h1>
+
+    {{ govukSelect({
+      id: "test-centre",
+      name: "test_centre",
+      label: {
+        text: "Choose location"
+      },
+        hint: {
+        text: "This can be different to where you went before"
+      },
+      items: [
+        {
+          value: "choose",
+          text: "Choose location",
+          selected: true
+        },
+        {
+          value: "hornchruch",
+          text: "Hornchurch"
+        },
+        {
+          value: "goodmayes",
+          text: "Goodmayes"
+        },
+        {
+          value: "barking",
+          text: "Barking"
+        }
+       ]
+
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "dsp-template.html" %}
+
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+
+  <form action="/test-booking-summary" method="POST">
+    <h1 class="govuk-heading-l">Booking summary: {{ test_type | displayTestType }}</h1>
+
+    {{ govukSummaryList(bookingSummary) }}
+
+    {{ govukButton({
+      text: "Confirm and book test"
+    }) }}
+  </form>
+{% endblock %}

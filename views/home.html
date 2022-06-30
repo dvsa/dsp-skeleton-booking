@@ -1,0 +1,11 @@
+{% extends "dsp-template.html" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  {{ govukButton({
+    text: "Start now",
+    href: "/test-type",
+    isStartButton: true
+  }) }}
+{% endblock %}

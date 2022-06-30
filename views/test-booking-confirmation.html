@@ -1,0 +1,12 @@
+{% extends "dsp-template.html" %}
+
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+
+{% block content %}
+
+    {{ govukPanel({
+      titleText: "Booking confirmed",
+      text: ""
+    }) }}
+
+{% endblock %}

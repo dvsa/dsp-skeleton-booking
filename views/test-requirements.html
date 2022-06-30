@@ -1,0 +1,92 @@
+{% extends "dsp-template.html" %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+
+
+{% block content %}
+
+  <h1 class="govuk-heading-l">Test Requirements: {{ test_type | displayTestType }}</h1>
+
+  <form method="POST" action="/test-requirements">
+    {% if test_type !== 'large_goods' %}
+      {{ govukRadios({
+        idPrefix: "extended-test",
+        name: "extended_test",
+        fieldset: {
+          legend: {
+            text: "Have you been ordered by a court to take an extended test?"
+          }
+        },
+        items: [
+          {
+            value: true,
+            text: "Yes"
+          },
+          {
+            value: false,
+            text: "No"
+          }
+        ]
+      }) }}
+    {% endif %}
+
+    {% set specialRequirements %}
+      {{ govukCheckboxes({
+        idPrefix: "special-requirement-details",
+        name: "special_requirements_details",
+        fieldset: {
+          legend: {
+            text: "Please give us details of your special requirements or disabilities."
+          }
+        },
+        items: [
+          {
+            divider: "Do you have"
+          },
+          {
+            value: "dyslexia",
+            text: "Dyslexia"
+          },
+          {
+            value: "missing_limbs",
+            text: "Missing Limbs"
+          }
+        ]
+      }) }}
+    {% endset -%}
+
+    {{ govukRadios({
+      idPrefix: "special-requirements",
+      name: "special_requirements",
+      fieldset: {
+        legend: {
+          text: "Do you have any special requirements?"
+        }
+      },
+      hint: {
+        html: "disabilities or conditions, pregnancy, Welsh speaking examiner"
+      },
+      items: [
+        {
+          value: "true",
+          text: "Yes",
+          conditional: {
+            html: specialRequirements
+          }
+        },
+        {
+          value: "false",
+          text: "No"
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+{% endblock %}
+

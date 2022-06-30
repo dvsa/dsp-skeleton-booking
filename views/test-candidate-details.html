@@ -1,0 +1,49 @@
+{% extends "dsp-template.html" %}
+
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+
+  <form action="/test-candidate-details" method="POST">
+    <h1 class="govuk-heading-l">Candidate details: {{ test_type | displayTestType }}</h1>
+
+    {{ govukInput({
+      label: {
+        text: "First name"
+      },
+      id: "first-name",
+      name: "first_name"
+    }) }}
+
+    {{ govukInput({
+      label: {
+        text: "Surname"
+      },
+      id: "surname",
+      name: "surname"
+    }) }}
+
+    {{ govukInput({
+      label: {
+        text: "Telephone number"
+      },
+      id: "telephone-number",
+      name: "telephone_number",
+      inputmode: "tel"
+    }) }}
+
+    {{ govukInput({
+      label: {
+        text: "Email address"
+      },
+      id: "email-address",
+      name: "email_address",
+      inputmode: "email"
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+{% endblock %}

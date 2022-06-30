@@ -1,0 +1,39 @@
+{% extends "dsp-template.html" %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+
+  <form action="/test-type" method="POST">
+    {{ govukRadios({
+      idPrefix: "type-of-test",
+      name: "test_type",
+      fieldset: {
+        legend: {
+          text: "Test Type",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: "Select one option."
+      },
+      items: [
+        {
+          value: "car",
+          text: "B - Car"
+        },
+        {
+          value: "large_goods",
+          text: "C - Large goods"
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+
+{% endblock %}
