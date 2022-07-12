@@ -10,7 +10,7 @@
   <h1 class="govuk-heading-l">Test Requirements: {{ test_type | displayTestType }}</h1>
 
   <form method="POST" action="/test-requirements">
-    {% if test_type !== 'large_goods' %}
+    {% if test_type !== ProductID.lorry %}
       {{ govukRadios({
         idPrefix: "extended-test",
         name: "extended_test",

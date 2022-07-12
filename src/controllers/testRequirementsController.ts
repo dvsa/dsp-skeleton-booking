@@ -1,14 +1,15 @@
 import { Application, Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
+import { ProductID } from '../client/types/referenceTypes';
 import { types } from '../ioc/types';
 import {
-  BookTestSession, BookTestSessionService, SpecialRequirements, TestType,
+  BookTestSession, BookTestSessionService, SpecialRequirements,
 } from '../services/session/bookTestSessionService';
 import { Logger } from '../util/logger';
 import { Controller } from './controller';
 
 type TestRequirementsViewModel = {
-  test_type: TestType
+  test_type: ProductID
   extended_test?: string
   special_requirements?: string
   special_requirements_details?: SpecialRequirements[]

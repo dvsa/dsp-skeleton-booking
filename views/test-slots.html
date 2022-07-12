@@ -1,8 +1,6 @@
 {% extends "dsp-template.html" %}
 
-{% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
-{% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
 {% block content %}
@@ -10,16 +8,20 @@
   <form action="/test-slots" method="POST">
     <h1 class="govuk-heading-l">Test slots: {{ test_type | displayTestType }}</h1>
 
-    {{ govukRadios({
-      idPrefix: "test-slot",
-      name: "slot",
-      fieldset: {
-        legend: {
-          text: "Select a time slot"
-        }
-      },
-      items: slots
-    }) }}
+    {% if slots.length > 0 %}
+      {{ govukRadios({
+        idPrefix: "test-slot",
+        name: "slot",
+        fieldset: {
+          legend: {
+            text: "Select a time slot"
+          }
+        },
+        items: slots
+      }) }}
+    {% else %}
+      <p class="govuk-body">No slots found</p>
+    {% endif %}
 
     {{ govukButton({
       text: "Continue"

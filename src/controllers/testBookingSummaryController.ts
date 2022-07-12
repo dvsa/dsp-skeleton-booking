@@ -1,15 +1,16 @@
 import { Application, Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
 import moment from 'moment';
+import { ProductID } from '../client/types/referenceTypes';
 import { displayTestType } from '../filters/testType';
 import { types } from '../ioc/types';
-import { BookTestSession, BookTestSessionService, TestType } from '../services/session/bookTestSessionService';
+import { BookTestSession, BookTestSessionService } from '../services/session/bookTestSessionService';
 import { SummaryList, SummaryListRow } from '../types/designSystem';
 import { Logger } from '../util/logger';
 import { Controller } from './controller';
 
 type TestBookingSummaryViewModel = {
-  test_type: TestType
+  test_type: ProductID
   bookingSummary: SummaryList
 }
 

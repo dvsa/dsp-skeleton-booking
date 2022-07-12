@@ -6,18 +6,19 @@ import {
 } from 'express';
 import { inject, injectable } from 'inversify';
 import {
-  BookTestSession, BookTestSessionService, TestType,
+  BookTestSession, BookTestSessionService,
 } from '../services/session/bookTestSessionService';
 import { types } from '../ioc/types';
 import { Controller } from './controller';
 import { Logger } from '../util/logger';
+import { ProductID } from '../client/types/referenceTypes';
 
 type TestTypeForm = {
-  test_type: TestType
+  test_type: ProductID
 };
 
 type TestTypeViewModel = {
-  test_type? : TestType
+  test_type? : ProductID
 };
 
 @injectable()

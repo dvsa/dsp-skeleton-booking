@@ -1,0 +1,42 @@
+{% extends "dsp-template.html" %}
+
+{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+
+  <form action="/test-date" method="POST">
+    <h1 class="govuk-heading-l">Test Date: {{ test_type | displayTestType }}</h1>
+
+    {{ govukDateInput({
+      id: "from-date",
+      namePrefix: "from",
+      fieldset: {
+        legend: {
+          text: "From"
+        }
+      },
+      hint: {
+        text: "For example, 27 3 2007"
+      }
+    }) }}
+
+    {{ govukDateInput({
+      id: "to-date",
+      namePrefix: "to",
+      fieldset: {
+        legend: {
+          text: "To"
+        }
+      },
+      hint: {
+        text: "For example, 27 3 2007"
+      }
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+
+{% endblock %}

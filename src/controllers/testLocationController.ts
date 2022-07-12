@@ -1,19 +1,20 @@
 import { Application, Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
+import { ProductID, TestCentreID } from '../client/types/referenceTypes';
 import { types } from '../ioc/types';
 import {
-  BookTestSession, BookTestSessionService, TestCentre, TestType,
+  BookTestSession, BookTestSessionService,
 } from '../services/session/bookTestSessionService';
 import { Logger } from '../util/logger';
 import { Controller } from './controller';
 
 type TestLocationViewModel = {
-  test_type: TestType
-  test_centre?: TestCentre
+  test_type: ProductID
+  test_centre?: TestCentreID
 };
 
 type TestLocationFormModel = {
-  test_centre: TestCentre
+  test_centre: TestCentreID
 };
 
 @injectable()
@@ -49,7 +50,7 @@ export class TestLocationController implements Controller {
       test_centre: body.test_centre,
     });
 
-    res.redirect('/test-slots');
+    res.redirect('/test-date');
   }
 
   private showTestLocationController(res: Response, session: BookTestSession): void {
