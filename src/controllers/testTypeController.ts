@@ -11,14 +11,14 @@ import {
 import { types } from '../ioc/types';
 import { Controller } from './controller';
 import { Logger } from '../util/logger';
-import { ProductID } from '../client/types/referenceTypes';
+import { TestType } from '../client/types/referenceTypes';
 
 type TestTypeForm = {
-  test_type: ProductID
+  test_type: TestType
 };
 
 type TestTypeViewModel = {
-  test_type? : ProductID
+  test_type? : TestType
 };
 
 @injectable()

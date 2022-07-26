@@ -4,7 +4,8 @@ import moment from 'moment';
 import { SlotClient } from '../client/slotClient';
 import { GetSlotsRequest } from '../client/types/getSlotsRequest';
 import { SlotResponse } from '../client/types/getSlotsResponse';
-import { ProductID, ServiceTypeID } from '../client/types/referenceTypes';
+import { TestType } from '../client/types/referenceTypes';
+import { ReserveSlotRequest } from '../client/types/reserveSlotRequest';
 import { types } from '../ioc/types';
 import { BookTestSession, BookTestSessionService } from '../services/session/bookTestSessionService';
 import { Checkbox } from '../types/designSystem';
@@ -16,7 +17,7 @@ type TestSlotFormModel = {
 };
 
 type TestSlotsViewModel = {
-  test_type: ProductID
+  test_type: TestType
   slots: Checkbox[]
 };
 
@@ -66,7 +67,7 @@ export class TestSlotsController implements Controller {
       test_date: slots.StartTime
     });
 
-    await this.client.reserveSlot(body.slot);
+    await this.client.reserveSlot(body.slot, this.generateReserveSlotRequest(session));
 
     res.redirect('/test-candidate-details');
   }
@@ -106,10 +107,21 @@ export class TestSlotsController implements Controller {
     const request: GetSlotsRequest = {}
 
     request.TestCentre = session.test_centre
-    request.StartDate = moment(session.from_date).startOf('day').toDate();
-    request.EndDate = moment(session.to_date).endOf('day').toDate();
-    request.ServiceType = ServiceTypeID.standard
+    request.StartDate = moment().startOf('day').toDate();
+    request.EndDate = moment().add(14, 'd').endOf('day').toDate();
+    request.TestType = session.test_type;
 
+    if (session.special_requirements === 'true') {
+      request.SpecialAccommodations = true
+    }
+
+    if (session.special_requirements_details.includes('missing_limbs')) {
+      request.ExtraTime = true
+    }
+
+    if (session.extended_test === 'true') {
+      request.Extended = true
+    }
     return request
   }
 
@@ -123,5 +135,13 @@ export class TestSlotsController implements Controller {
     }
 
     return groupedSlots
+  }
+
+  private generateReserveSlotRequest(session: BookTestSession): ReserveSlotRequest {
+    return {
+      ExtendedSlot: session.extended_test === 'true' ? true : false,
+      SpecialRequirements: session.special_requirements_details,
+      TestType: session.test_type
+    }
   }
 }

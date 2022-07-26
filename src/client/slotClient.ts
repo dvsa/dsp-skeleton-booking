@@ -4,6 +4,8 @@ import { injectable } from 'inversify';
 import { SlotResponse } from './types/getSlotsResponse';
 import { StatusCodes } from 'http-status-codes';
 import { GetSlotsRequest } from './types/getSlotsRequest';
+import { BookSlotRequest } from './types/bookSlotRequest';
+import { ReserveSlotRequest } from './types/reserveSlotRequest';
 
 @injectable()
 export class SlotClient {
@@ -27,8 +29,12 @@ export class SlotClient {
     return this.httpHandler<SlotResponse>(() => this.axios.get(`/slots/${slotId}`))
   }
 
-  public reserveSlot(slotId: string): Promise<void> {
-    return this.httpHandler<void>(() => this.axios.put(`/slots/${slotId}/reserve`))
+  public reserveSlot(slotId: string, request: ReserveSlotRequest): Promise<void> {
+    return this.httpHandler<void>(() => this.axios.put(`/slots/${slotId}/reserve`, request))
+  }
+
+  public bookSlot(slotId: string, request: BookSlotRequest): Promise<void> {
+    return this.httpHandler<void>(() => this.axios.post(`/slots/${slotId}/book`, request))
   }
 
   private async httpHandler<T>(request: () => AxiosPromise<T>): Promise<T> {

@@ -1,13 +1,14 @@
-import { ProductID, ServiceTypeID } from './referenceTypes';
+import { TestType, ServiceTypeID, SlotStatus } from './referenceTypes';
 
 export type SlotResponse = {
   SlotID: string
   StartTime: Date
   EndTime: Date
-  Service: ProductID
+  TestType: TestType
   ServiceType: ServiceTypeID
   TestCentre: string
   Price: string
-  Booked: boolean
-  Reserved: boolean
+  Released: boolean
+  Extendable: boolean
+  Status: SlotStatus
 };

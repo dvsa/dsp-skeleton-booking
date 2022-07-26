@@ -10,7 +10,6 @@ function attachRoutes(app: Application): void {
     getController(types.TestTypeController),
     getController(types.TestRequirementsController),
     getController(types.TestLocationController),
-    getController(types.TestDateController),
     getController(types.TestSlotsController),
     getController(types.TestCandidateDetailsController),
     getController(types.TestBookingSummaryController),

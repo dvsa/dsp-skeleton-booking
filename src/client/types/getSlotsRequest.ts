@@ -1,9 +1,12 @@
-import { ProductID, ServiceTypeID, TestCentreID } from "./referenceTypes";
+import { TestType, ServiceTypeID, TestCentreID } from "./referenceTypes";
 
 export type GetSlotsRequest = {
   StartDate?: Date
   EndDate?: Date
-  Product?: ProductID
+  TestType?: TestType
   ServiceType?: ServiceTypeID
   TestCentre?: TestCentreID
+  SpecialAccommodations?: boolean
+  ExtraTime?: boolean
+  Extended?: boolean
 };

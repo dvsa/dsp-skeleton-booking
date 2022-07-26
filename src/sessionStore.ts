@@ -15,13 +15,14 @@ function getSessionStore(): RequestHandler {
     },
     resave: false,
     saveUninitialized: false,
+    rolling: true,
     store: new DynamoDBStore({
       table: {
         name: 'dsp-alpha-session-store',
         hashKey: 'session-key',
       },
-      ttl: 600000,
-      keepExpired: false,
+      ttl: 900000,
+      keepExpired: false
     }),
   };
 

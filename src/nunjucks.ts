@@ -5,7 +5,7 @@ import { Application } from 'express';
 import path from 'path';
 import nunjucks from 'nunjucks';
 import { displayTestType } from './filters/testType';
-import { ProductID, ServiceTypeID, TestCentreID } from './client/types/referenceTypes';
+import { TestType, ServiceTypeID, TestCentreID } from './client/types/referenceTypes';
 
 export function configureNunjucks(app: Application): void {
   app.set('views', path.join(__dirname, '../views'));
@@ -23,7 +23,7 @@ export function configureNunjucks(app: Application): void {
 
   env.addFilter('displayTestType', displayTestType)
 
-  env.addGlobal('ProductID', ProductID)
+  env.addGlobal('ProductID', TestType)
   env.addGlobal('ServiceTypeID', ServiceTypeID)
   env.addGlobal('TestCentreID', TestCentreID)
 

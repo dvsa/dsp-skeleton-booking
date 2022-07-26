@@ -1,11 +1,11 @@
 import { injectable } from 'inversify';
-import { ProductID, TestCentreID } from '../../client/types/referenceTypes';
+import { TestType, TestCentreID } from '../../client/types/referenceTypes';
 import { SessionService } from './sessionService';
 
 export type SpecialRequirements = 'dyslexia' | 'missing_limbs';
 
 export type BookTestSession = {
-  test_type?: ProductID
+  test_type?: TestType
   extended_test?: string
   special_requirements?: string
   special_requirements_details?: SpecialRequirements[]

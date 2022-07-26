@@ -1,10 +1,10 @@
-import { ProductID } from '../client/types/referenceTypes';
+import { TestType } from '../client/types/referenceTypes';
 
-export function displayTestType(product: ProductID) {
+export function displayTestType(product: TestType) {
   switch (product) {
-    case ProductID.car:
+    case TestType.car:
       return 'B - Car'
-    case ProductID.lorry:
+    case TestType.lorry:
       return 'C - Large goods'
     default:
       break;
